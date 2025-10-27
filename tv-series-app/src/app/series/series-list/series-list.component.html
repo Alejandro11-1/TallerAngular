@@ -1,0 +1,64 @@
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Tabla -->
+    <div class="col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <i class="bi bi-tv"></i> TV Series
+        </div>
+
+        <div class="card-body p-0">
+          <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 64px;">#</th>
+                <th>Name</th>
+                <th>Channel</th>
+                <th>Seasons</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (s of series; track s.id) {
+                <tr (click)="select(s)" style="cursor:pointer">
+                  <td class="fw-semibold">{{ s.id }}</td>
+                  <td class="text-primary">{{ s.name }}</td>
+                  <td>{{ s.channel }}</td>
+                  <td class="text-end">{{ s.seasons }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-footer">
+          <span class="fw-semibold">Seasons average:</span>
+          <span class="ms-2">{{ seasonsAverage }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel detalle -->
+    <div class="col-lg-5" *ngIf="selected">
+      <div class="card shadow-sm">
+        <img
+          [src]="selected!.poster"
+          [alt]="selected!.name"
+          class="card-img-top img-fluid"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ selected!.name }}</h5>
+          <p class="text-muted small mb-3">{{ selected!.channel }}</p>
+
+          <p class="card-text" style="white-space: pre-line">
+            {{ selected!.description }}
+          </p>
+
+          <a class="btn btn-outline-primary btn-sm" target="_blank" [href]="selected!.webpage">
+            Official page
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
